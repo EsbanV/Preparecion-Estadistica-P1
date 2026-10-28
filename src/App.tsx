@@ -8,43 +8,60 @@ import { MathText } from './MathText'
 const bank = [...oficiales, ...seguimiento]
 const categories = [...new Set(bank.map(q => q.category))]
 const typeNames = { multiple: 'Alternativas', open: 'Respuesta oral', evidence: 'Localizar evidencia' }
+const formats = [
+  { value: 'all', label: 'Todas' },
+  { value: 'closed', label: 'Selección múltiple' },
+  { value: 'open', label: 'Desarrollo' },
+] as const
+type Format = (typeof formats)[number]['value']
+const matchesFormat = (q: DefenseQuestion, format: Format) => format === 'all' || (format === 'open') === (q.type === 'open')
+type Answer = { selected: number | null; revealed: boolean; covered: number[]; draft: string }
+const emptyAnswer: Answer = { selected: null, revealed: false, covered: [], draft: '' }
+const earnedPoints = (q: DefenseQuestion, a: Answer = emptyAnswer) => q.type === 'open' ? a.covered.length / q.points.length : Number(a.selected === q.correctOption)
 
 export default function App() {
   const [mode, setMode] = useState('all')
   const [filter, setFilter] = useState(categories[0])
   const [kind, setKind] = useState('multiple')
+  const [format, setFormat] = useState<Format>('all')
   const [session, setSession] = useState<DefenseQuestion[]>([])
   const [questionIndex, setQuestionIndex] = useState(0)
-  const [selectedOption, setSelectedOption] = useState<number | null>(null)
-  const [revealed, setRevealed] = useState(false)
-  const [covered, setCovered] = useState<number[]>([])
-  const [draft, setDraft] = useState('')
-  const [scores, setScores] = useState<number[]>([])
+  const [answers, setAnswers] = useState<Answer[]>([])
   const [finished, setFinished] = useState(false)
   const question = session[questionIndex]
+  const { selected: selectedOption, revealed, covered, draft } = answers[questionIndex] ?? emptyAnswer
   const pool = bank.filter(q => mode === 'category' ? q.category === filter : mode === 'type' ? q.type === kind : true)
+    .filter(q => mode === 'type' || matchesFormat(q, format))
+  const simulationSize = Math.min(10, pool.length)
+  const scores = session.map((q, i) => earnedPoints(q, answers[i]))
   const score = scores.reduce((sum, value) => sum + value, 0)
 
-  function resetAnswer() {
-    setSelectedOption(null)
-    setRevealed(false)
-    setCovered([])
-    setDraft('')
+  function updateAnswer(patch: Partial<Answer>) {
+    setAnswers(prev => {
+      const next = [...prev]
+      next[questionIndex] = { ...(prev[questionIndex] ?? emptyAnswer), ...patch }
+      return next
+    })
   }
+  const setSelectedOption = (selected: number) => updateAnswer({ selected })
+  const setRevealed = (revealed: boolean) => updateAnswer({ revealed })
+  const setCovered = (covered: number[]) => updateAnswer({ covered })
+  const setDraft = (draft: string) => updateAnswer({ draft })
+
   function startQuiz() {
     setSession(prepareSession(pool, mode === 'simulation'))
     setQuestionIndex(0)
-    setScores([])
+    setAnswers([])
     setFinished(false)
-    resetAnswer()
   }
   function nextQuestion() {
-    const earned = question.type === 'open' ? covered.length / question.points.length : Number(selectedOption === question.correctOption)
-    setScores([...scores, earned])
     if (questionIndex === session.length - 1) setFinished(true)
-    else { setQuestionIndex(questionIndex + 1); resetAnswer() }
+    else setQuestionIndex(questionIndex + 1)
   }
-  function goHome() { setSession([]); setFinished(false); resetAnswer() }
+  function previousQuestion() {
+    if (questionIndex > 0) setQuestionIndex(questionIndex - 1)
+  }
+  function goHome() { setSession([]); setFinished(false); setAnswers([]) }
 
   return (
     <main className="page-shell">
@@ -69,8 +86,11 @@ export default function App() {
             </select></label>
             {mode === 'category' && <label className="field">Categoría<select value={filter} onChange={e => setFilter(e.target.value)}>{categories.map(c => <option key={c}>{c}</option>)}</select></label>}
             {mode === 'type' && <label className="field">Tipo<select value={kind} onChange={e => setKind(e.target.value)}>{Object.entries(typeNames).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>}
-            <p className="intro-copy">{mode === 'simulation' ? '10 preguntas aleatorias, con al menos 4 respuestas orales.' : `${pool.length} preguntas. El orden de preguntas y alternativas cambia en cada sesión.`}</p>
-            <button className="next-button" onClick={startQuiz}>Comenzar →</button>
+            {mode !== 'type' && <div className="field" role="radiogroup" aria-label="Formato de pregunta">Formato
+              <div className="segmented">{formats.map(f => <button key={f.value} id={`format-${f.value}`} type="button" role="radio" aria-checked={format === f.value} className={format === f.value ? 'active' : ''} onClick={() => setFormat(f.value)}>{f.label}</button>)}</div>
+            </div>}
+            <p className="intro-copy">{!pool.length ? 'No hay preguntas con esta combinación de filtros.' : mode === 'simulation' ? `${simulationSize} preguntas aleatorias${format === 'all' ? ', con al menos 4 respuestas orales' : ''}.` : `${pool.length} preguntas. El orden de preguntas y alternativas cambia en cada sesión.`}</p>
+            <button className="next-button" disabled={!pool.length} onClick={startQuiz}>Comenzar →</button>
           </> : finished ? <>
             <p className="question-kicker">PRÁCTICA COMPLETADA</p><h2>Resultado: {Math.round(score / session.length * 100)} %</h2>
             <p>Las alternativas valen un punto. En las respuestas orales cuenta la proporción de puntos de pauta que marcaste.</p>
@@ -97,7 +117,7 @@ export default function App() {
               <strong>Evidencia en el proyecto R</strong>{question.evidence.map(file => <code key={file}>{file}</code>)}
               <p><strong>Fuente: </strong>{question.source}</p>
             </div>}
-            <footer className="card-footer"><span className="keyboard-hint">Cada respuesta cuenta</span><button className="next-button" disabled={!revealed} onClick={nextQuestion}>{questionIndex === session.length - 1 ? 'Ver resultado' : 'Continuar'} →</button></footer>
+            <footer className="card-footer"><button className="prev-button" id="prev-question" disabled={questionIndex === 0} onClick={previousQuestion}>← Anterior</button><span className="keyboard-hint">Cada respuesta cuenta</span><button className="next-button" disabled={!revealed} onClick={nextQuestion}>{questionIndex === session.length - 1 ? 'Ver resultado' : 'Continuar'} →</button></footer>
           </>}
         </section>
       </section>

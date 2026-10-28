@@ -14,7 +14,7 @@ export function prepareSession(pool: DefenseQuestion[], simulation = false): Def
   if (simulation) {
     const open = selected.filter(q => q.type === 'open').slice(0, 4)
     const ids = new Set(open.map(q => q.id))
-    selected = shuffle([...open, ...selected.filter(q => !ids.has(q.id)).slice(0, 6)])
+    selected = shuffle([...open, ...selected.filter(q => !ids.has(q.id)).slice(0, 10 - open.length)])
   }
   return selected.map(q => {
     if (q.type === 'open') return q
