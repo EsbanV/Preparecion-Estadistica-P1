@@ -1,0 +1,338 @@
+{
+  "total": 45,
+  "counts": {
+    "P1 Población y clases": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P2 Submuestreo equilibrado": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P3 Validación y prueba": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P4 Estimación de parámetros": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P5 Densidad y acumulada": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P6 Categorías y Laplace": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P7 Reconstrucción de predicción": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P8 Selección del umbral": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P9 Distribuciones y percentiles": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "P10 Denominadores y sumas": {
+      "multiple": 1,
+      "open": 1,
+      "evidence": 1
+    },
+    "Decisiones de diseño": {
+      "multiple": 0,
+      "open": 3,
+      "evidence": 0
+    },
+    "Supuestos": {
+      "multiple": 0,
+      "open": 3,
+      "evidence": 0
+    },
+    "Interpretación": {
+      "multiple": 0,
+      "open": 3,
+      "evidence": 0
+    },
+    "Hipotéticos": {
+      "multiple": 0,
+      "open": 2,
+      "evidence": 0
+    },
+    "Datos y alcance": {
+      "multiple": 0,
+      "open": 2,
+      "evidence": 0
+    },
+    "Reproducibilidad": {
+      "multiple": 0,
+      "open": 2,
+      "evidence": 0
+    }
+  },
+  "numbers": [
+    {
+      "question": "p1-multiple",
+      "value": "28 308",
+      "found": true,
+      "context": "Total de personas de la tabla analítica: 28 308.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "28 308",
+      "found": true,
+      "context": "Total de personas de la tabla analítica: 28 308.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "1",
+      "found": true,
+      "context": "Clase 1: ingreso superior a USD 50.000; clase 0: ingreso menor o igual a USD 50.000.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "50.000",
+      "found": true,
+      "context": "Clase 1: ingreso superior a USD 50.000; clase 0: ingreso menor o igual a USD 50.000.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "0",
+      "found": true,
+      "context": "Clase 1: ingreso superior a USD 50.000; clase 0: ingreso menor o igual a USD 50.000.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "50.000",
+      "found": true,
+      "context": "Clase 1: ingreso superior a USD 50.000; clase 0: ingreso menor o igual a USD 50.000.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-open",
+      "value": "9",
+      "found": true,
+      "context": "El filtro education-num ≥ 9 conserva secundaria completa o superior; 12th queda fuera.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p1-evidence",
+      "value": "28 308",
+      "found": true,
+      "context": "Total de personas de la tabla analítica: 28 308.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p2-multiple",
+      "value": "6 077",
+      "found": true,
+      "context": "Personas seleccionadas por clase para entrenar: 6 077.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p2-open",
+      "value": "6 077",
+      "found": true,
+      "context": "Personas seleccionadas por clase para entrenar: 6 077.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p2-evidence",
+      "value": "6 077",
+      "found": true,
+      "context": "Personas seleccionadas por clase para entrenar: 6 077.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p3-multiple",
+      "value": "2 833",
+      "found": true,
+      "context": "Personas de prueba por réplica: 2 833.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p3-open",
+      "value": "2 833",
+      "found": true,
+      "context": "Personas de prueba por réplica: 2 833.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p3-evidence",
+      "value": "2 833",
+      "found": true,
+      "context": "Personas de prueba por réplica: 2 833.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p4-multiple",
+      "value": "0,5",
+      "found": true,
+      "context": "Previa de cada clase en entrenamiento: 0,5.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p4-open",
+      "value": "0,5",
+      "found": true,
+      "context": "Previa de cada clase en entrenamiento: 0,5.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p4-evidence",
+      "value": "0,5",
+      "found": true,
+      "context": "Previa de cada clase en entrenamiento: 0,5.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p5-multiple",
+      "value": "0,029871",
+      "found": true,
+      "context": "Densidad por año, clase negativa, edad del ejemplo: 0,029871.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p5-open",
+      "value": "0,029871",
+      "found": true,
+      "context": "Densidad por año, clase negativa, edad del ejemplo: 0,029871.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p5-evidence",
+      "value": "0,029871",
+      "found": true,
+      "context": "Densidad por año, clase negativa, edad del ejemplo: 0,029871.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p6-multiple",
+      "value": "0,135206",
+      "found": true,
+      "context": "Probabilidad Female/White dentro de la clase positiva: 0,135206.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p6-open",
+      "value": "0,135206",
+      "found": true,
+      "context": "Probabilidad Female/White dentro de la clase positiva: 0,135206.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p6-evidence",
+      "value": "0,135206",
+      "found": true,
+      "context": "Probabilidad Female/White dentro de la clase positiva: 0,135206.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p7-multiple",
+      "value": "−0,027710",
+      "found": true,
+      "context": "D de la persona del ejemplo: −0,027710.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p7-open",
+      "value": "−0,027710",
+      "found": true,
+      "context": "D de la persona del ejemplo: −0,027710.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p7-evidence",
+      "value": "−0,027710",
+      "found": true,
+      "context": "D de la persona del ejemplo: −0,027710.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p8-multiple",
+      "value": "0,0991012",
+      "found": true,
+      "context": "Umbral elegido en la primera réplica: 0,0991012.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p8-open",
+      "value": "0,0991012",
+      "found": true,
+      "context": "Umbral elegido en la primera réplica: 0,0991012.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p8-evidence",
+      "value": "0,0991012",
+      "found": true,
+      "context": "Umbral elegido en la primera réplica: 0,0991012.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p9-multiple",
+      "value": "0,0681",
+      "found": true,
+      "context": "Mediana del umbral entre réplicas: 0,0681.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p9-open",
+      "value": "0,0681",
+      "found": true,
+      "context": "Mediana del umbral entre réplicas: 0,0681.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p9-evidence",
+      "value": "0,0681",
+      "found": true,
+      "context": "Mediana del umbral entre réplicas: 0,0681.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p10-multiple",
+      "value": "93",
+      "found": true,
+      "context": "Réplicas con TPR estimable para Female/Other: 93.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p10-open",
+      "value": "93",
+      "found": true,
+      "context": "Réplicas con TPR estimable para Female/Other: 93.",
+      "source": "04_resultados.md"
+    },
+    {
+      "question": "p10-evidence",
+      "value": "93",
+      "found": true,
+      "context": "Réplicas con TPR estimable para Female/Other: 93.",
+      "source": "04_resultados.md"
+    }
+  ],
+  "excluded": [
+    "Datos marcados FALTA DATO",
+    "Cálculos adicionales fuera del pipeline",
+    "Reportes históricos de commits"
+  ],
+  "checks": "IDs, opciones, pautas, evidencia, cobertura, LaTeX y coincidencia textual de cifras: OK"
+}
